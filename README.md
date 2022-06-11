@@ -23,8 +23,8 @@ python main.py
 You can choose to include or exclude FTCP feature set by running:
 
 ```bash
-python main.py -rp include_ftcp
-python main.py -rp exclude_ftcp
+python main.py --rp include_ftcp
+python main.py --rp exclude_ftcp
 ```
 
    

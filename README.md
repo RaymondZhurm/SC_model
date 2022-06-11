@@ -1,17 +1,17 @@
 # SC_model
 
-SC Model is a inorganic material crystal materials ssynthesizability score prediction model
+SC Model is a inorganic material crystal materials synthesizability score prediction model
+
 
 ## Installation
 
-To install, just clone the following repository:
+To install, just clone the repository
 
+Then install all the required packages:
 pip install -r requirement.txt
 
 
 ## Usage
-
-
 
    
 

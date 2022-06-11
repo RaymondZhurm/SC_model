@@ -1,6 +1,6 @@
 # SC_model
 
-SC Model is a inorganic material crystal materials synthesizability score prediction model
+SC Model is an inorganic material crystal materials synthesizability score prediction model
 
 
 ## Installation

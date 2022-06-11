@@ -8,6 +8,7 @@ SC Model is an inorganic material crystal materials synthesizability score predi
 To install, just clone the repository
 
 Then install all the required packages:
+
 pip install -r requirement.txt
 
 

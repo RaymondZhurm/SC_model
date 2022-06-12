@@ -1,0 +1,11 @@
+tensorflow==2.6.0
+keras==2.6.0
+scikit-learn
+numpy
+matplotlib
+pandas
+matminer==0.6.2
+pymatgen==2019.12.22
+joblib
+json
+itertools

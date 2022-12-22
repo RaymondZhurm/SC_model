@@ -11,7 +11,6 @@ from tensorflow.keras.layers import Input,Dense, Lambda,Conv1D,Conv2DTranspose, 
 from tensorflow.python.keras.regularizers import l2
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
-from sklearn.model_selection import KFold
 from pymatgen import Composition
 import pandas as pd
 import utils
@@ -24,8 +23,6 @@ from sklearn import metrics
 import matplotlib.pyplot as plt
 from sklearn.metrics import ConfusionMatrixDisplay
 from sklearn import ensemble
-from sklearn import linear_model
-from sklearn import neural_network
 import matplotlib
 import seaborn as sns
 from sklearn import decomposition
@@ -38,7 +35,7 @@ warnings.filterwarnings("ignore")
 
 parser = argparse.ArgumentParser(description='SC_model'
                                              '')
-parser.add_argument('--rp', choices=['include_ftcp', 'exclude_ftcp','atomic'],
+parser.add_argument('--rp', choices=['include_ftcp', 'exclude_ftcp', 'atomic'],
                     default='exclude_ftcp')
 
 

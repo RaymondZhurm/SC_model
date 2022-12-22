@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import tensorflow as tf
 from tensorflow.python.client import device_lib
 from tensorflow.keras import backend as K
@@ -38,7 +40,7 @@ warnings.filterwarnings("ignore")
 
 parser = argparse.ArgumentParser(description='SC_model'
                                              '')
-parser.add_argument('--rp', choices=['include_ftcp', 'exclude_ftcp'],
+parser.add_argument('--rp', choices=['include_ftcp', 'exclude_ftcp','atomic'],
                     default='exclude_ftcp')
 
 
@@ -55,6 +57,8 @@ def main():
     print('')
     if args.rp == 'exclude_ftcp':
         Crystal = crystal_represent_2(df, num_ele, num_sites)
+    elif args.rp == 'atomic':
+        Crystal = atomic_represent(df,num_ele, num_sites)
     else:
         Crystal = crystal_represent(df, num_ele, num_sites)
 
@@ -143,7 +147,7 @@ def main():
     ES = EarlyStopping(patience=50, verbose=1, restore_best_weights=True)
 
     forward.compile(optimizer=Adam(lr=8e-5),
-                    loss='binary_crossentropy', )  # 5e-4 ternary stable, 3e-4 ternary, 3e-4 quaternary all, 3e-4 2D
+                    loss='binary_crossentropy', )
     forward.fit(x=X_train, y=y_train, shuffle=True,
                 batch_size=1024, epochs=100, callbacks=[reduce_lr, ES, CSV],  # CSV, LRS,
                 validation_data=(X_test, y_test),

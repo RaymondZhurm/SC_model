@@ -1,7 +1,9 @@
+numpy==1.22.3
+protobuf==3.19.4
+tensorflow==2.8.0
+keras==2.8.0
 matminer==0.6.2
 pymatgen==2019.12.22
-tensorflow==2.6.0
-keras==2.6.0
 scikit-learn
 matplotlib
 pandas

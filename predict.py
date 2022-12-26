@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import tensorflow as tf
 from tensorflow.python.client import device_lib
 from tensorflow.keras import backend as K

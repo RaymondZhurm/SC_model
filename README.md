@@ -5,7 +5,7 @@ SC Model is an inorganic material crystal materials synthesizability score predi
 
 ## Installation
 
-Please use python 3.7.7 or 3.8.6 to run the model.
+Please use Python 3.7.7 to run the model.
 
 To install, just clone the repository. Then install all required packages:
 

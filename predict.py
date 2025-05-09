@@ -13,6 +13,8 @@ import joblib
 import argparse
 import sys
 import warnings
+import gzip
+import os.path
 
 
 
@@ -21,7 +23,7 @@ warnings.filterwarnings("ignore")
 parser = argparse.ArgumentParser(description='SC_model'
                                              '')
 parser.add_argument('--crystal', default=0)
-parser.add_argument('--type', choices=['formula', 'cif'],
+parser.add_argument('--type', choices=['formula', 'cif', 'quaternary_cif'],
                     default='formula')
 
 def main():
@@ -32,6 +34,34 @@ def main():
         model = tf.keras.models.load_model('./trained_models/SC_realspace')
         predict_list = [args.crystal]
         predict_crystals = crystal_represent_3(predict_list)
+        a = np.stack(predict_crystals, axis=0)
+        X = a
+        X = pad(X, 2)
+        y_result = model.predict(X)
+        print('')
+
+        print('---------Printing Result---------------')
+        crystal_ = Structure.from_file(args.crystal)
+        formula = crystal_.composition.reduced_formula
+        print('The SC for CIF[{}] is {}'.format(formula,y_result[0]))
+        print('')
+
+    if args.type == 'quaternary_cif':
+        print('---------Loading Model and Predicting---------------')
+        print('Warning: This is the SC model for quaternary crystal structures (CIF) with number of sites lower than 40')
+
+        if not os.path.isfile('trained_models/SC_quaternary/variables/variables.data-00000-of-00001'):
+            with open('trained_models/SC_quaternary/variables/variables.data-00000-of-00001.gz.001', 'rb') as f:
+                file_content = f.read()
+            with open('trained_models/SC_quaternary/variables/variables.data-00000-of-00001.gz.002', 'rb') as f:
+                file_content += f.read()
+            weight = gzip.decompress(file_content)
+            with open('trained_models/SC_quaternary/variables/variables.data-00000-of-00001', 'wb') as f:
+                f.write(weight)
+
+        model = tf.keras.models.load_model('./trained_models/SC_quaternary')
+        predict_list = [args.crystal]
+        predict_crystals = crystal_represent_3(predict_list, num_ele=4, num_sites=40)
         a = np.stack(predict_crystals, axis=0)
         X = a
         X = pad(X, 2)
@@ -208,7 +238,7 @@ def crystal_represent_3(cif_list, num_ele=3, num_sites=20):
         # calculate the ratio of each element in a compound
         ratio = np.sum(fc1_ind, axis=0)
         ratio = ratio / np.sum(ratio)
-        ratio = ratio.reshape(1, 3)
+        ratio = ratio.reshape(1, num_ele)
 
         # added elemental features (Raymond)
         ele_feature = np.zeros((num_ele, 56))

@@ -31,11 +31,14 @@ python main.py --rp atomic
 You can also use pre-trained compositional model or full crystal representation model to predict SC for compounds:
 
 ```bash
-python .\predict.py --type formula --crystal CaTiO3
-python .\predict.py --type cif --crystal .\data\predict_cif\CaTiO3_mp-4019_conventional_standard.cif
+python predict.py --type formula --crystal CaTiO3
+python predict.py --type cif --crystal .\data\predict_cif\CaTiO3_mp-4019_conventional_standard.cif
 ```
 
-   
+You can also use pre-trained quaternary full crystal representation model to predict SC for compounds:
+```bash
+python predict.py --type quaternary_cif --crystal .\data\predict_cif\Sr2FeMoO6.cif
+```
 
 ## Authors
 The code was primarily written by Ruiming Zhu, under supervision of Prof. Kedar Hippalgaonkar.
